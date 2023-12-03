@@ -1,42 +1,48 @@
 ﻿using System;
-namespace Abstract
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DeligateDemo
 {
+    delegate int Number(int n);
     internal class Program
     {
-        public abstract class Shape
+        static int num = 10;
+        public static int AddNum(int p)
         {
-            public abstract double Area();
-            public abstract double Perimeter();
+            num+=p;
+            return num;
         }
-            class Rectangle : Shape
-         {
-            double length;
-            double width;
-            public Rectangle(double l, double w)
-            {
-                length = l;
-                width = w;
-            }
-            public override double Area()
-            {
-                return length * width;
-            }
-            public override double Perimeter()
-            {
-                return 2 * (length + width);
-            }
+        public static int MulNum(int q)
+        {
+            num *= q;
+            return num;
+        } 
+        public static int getNum()
+        {
+            return num;
         }
+
         static void Main(string[] args)
         {
-            Rectangle r = new Rectangle(10, 7);
-
-            double area = r.Area();
-            double perimeter = r.Perimeter();
-            Console.WriteLine("Area of Rectangle: " + area);
-            Console.WriteLine("Perimeter of Rectangle: " + perimeter);
+          
+            Number n1 = new Number(AddNum);
+            Number n2 = new Number(MulNum);
+            n1(25);
+            Console.WriteLine("The value of Addition is:{0}",getNum());
+            n2(5);
+            Console.WriteLine("The value of Multiplication is:{0}", getNum());
+             /*
+            Number n;
+            Number n1 = new Number(AddNum);
+            Number n2 = new Number(MulNum);
+            n = n1;
+            n += n2;
+            n(5);
+            Console.WriteLine(" value of Number is :{0}",getNum());
+             */
         }
     }
 }
-
-
-
